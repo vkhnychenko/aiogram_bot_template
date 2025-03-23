@@ -41,16 +41,6 @@ make migrate
 - [Redis](https://redis.io/docs/) (in-memory database for FSM and caching)
 - [Project Fluent](https://projectfluent.org/) (modern localization system)
 
-## 🤝 Contributions
-
-### 🐛 Bug Reports / ✨ Feature Requests
-
-If you want to report a bug or request a new feature, feel free to open a [new issue](https://github.com/wakaree/aiogram_bot_template/issues/new).
-
-### Pull Requests
-
-If you want to help us improve the bot, you can create a new [Pull Request](https://github.com/wakaree/aiogram_bot_template/pulls).
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

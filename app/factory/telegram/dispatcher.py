@@ -10,6 +10,9 @@ from app.models.config import AppConfig
 from app.services.database.redis import RedisRepository
 from app.telegram.handlers import admin, common, extra
 from app.telegram.middlewares import UserMiddleware
+from app.telegram.middlewares.outer.database import DBSessionMiddleware
+from app.telegram.middlewares.outer.error import ErrorHandlingMiddleware
+from app.telegram.middlewares.outer.throttling import ThrottlingMiddleware
 from app.utils import mjson
 
 from ..redis import create_redis
@@ -38,6 +41,9 @@ def create_dispatcher(config: AppConfig) -> Dispatcher:
 
     dispatcher.include_routers(admin.router, common.router, extra.router)
     dispatcher.update.outer_middleware(UserMiddleware())
+    dispatcher.update.outer_middleware(DBSessionMiddleware())
+    dispatcher.update.outer_middleware(ErrorHandlingMiddleware())
+    dispatcher.update.outer_middleware(ThrottlingMiddleware(client=redis))
     i18n_middleware.setup(dispatcher=dispatcher)
     dispatcher.callback_query.middleware(CallbackAnswerMiddleware())
 
